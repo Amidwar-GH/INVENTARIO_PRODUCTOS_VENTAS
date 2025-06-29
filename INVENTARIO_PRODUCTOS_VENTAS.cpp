@@ -29,6 +29,7 @@ void actualizarProducto();
 void eliminarProducto();
 void registrarVenta();
 void listarVentas();
+void calcularTotalVentas();
 
 int main(){
 	char opcion;
@@ -69,7 +70,7 @@ void Eleccion(char opcion){
 		case 'E': eliminarProducto(); break; 
 		case 'F': registrarVenta(); break;
 		case 'G': listarVentas(); break; 
-		//case 'H': 
+		case 'H': calcularTotalVentas(); break; 
 		case 'S': cout << "Saliendo del sistema..."; break;
 		default: cout << "Opcion invalida.\n";
 	}
@@ -306,9 +307,35 @@ void listarVentas(){
 	}
 	
 	for(int i=0; i<ContadorDeVentas; i++){
-		cout<<"Venta numero"<<Ventas[i].codigo<<" | Producto: "<<Ventas[i].producto<<" | Cantidad: "<<Ventas[i].cantidad<<" | Total: "<<Ventas[i].Ptotal<<endl;
-		
+		cout<<"Venta numero "<<Ventas[i].codigo<<" | Producto: "<<Ventas[i].producto<<" | Cantidad: "<<Ventas[i].cantidad<<" | Total: "<<Ventas[i].Ptotal<<endl;
 	}
+	cout<<"Regresando al MENU principal ..."<<endl;
+}
+
+void calcularTotalVentas(){
+	if(ContadorDeVentas<=0){
+		cout<<"------------------------------"<<endl;
+		cout<<"\nAun no hay ventas registradas"<<endl;
+		cout<<endl;
+		cout<<"Regresando al MENU principal..."<<endl;
+		cout<<endl;
+		return;
+	}else{
+		cout<<"------------------------------------"<<endl; 
+		cout<<"-PROCEDIMIENTO DE TOTAL DE VENTAS-"<<endl;
+		cout<<"------------------------------------"<<endl;
+	
+		float total = 0;
+	
+		for(int i=0; i<ContadorDeVentas; i++){
+			total += Ventas[i].Ptotal;
+		}
+		cout<<"El total que se vendio es: "<<total<<endl;
+	
+		cout<<endl;
+		cout<<"Regresando al MENU principal..."<<endl;
+	}
+	
 }
 
 
