@@ -23,6 +23,7 @@ int ContadorDeVentas = 0;
 
 void registrarProducto();
 void Eleccion(char opcion);
+void listarProductos();
 
 int main(){
 	char opcion;
@@ -56,7 +57,7 @@ void Eleccion(char opcion){
 	
 	switch (opcion){
 		case 'A': registrarProducto(); break;
-		//case 'B': 
+		case 'B': listarProductos(); break;
 		//case 'C': 
 		//case 'D': 
 		//case 'E': 
@@ -100,5 +101,25 @@ void registrarProducto(){
 	cout<<"Regresando al menu principal..."<<endl;
 }
 
+void listarProductos(){
+	cout<<"-------------------------------------"<<endl; 
+	cout<<"-PROCEDIMIENTO DE LISTA DE PRODUCTOS-"<<endl;
+	cout<<"-------------------------------------"<<endl; 
+	cout<<endl;
+	
+	if(ContadorDeProductos == 0){
+		cout<<"No hay productos registrados."<<endl;
+		return;
+	}
+	
+	for(int i=0; i<ContadorDeProductos; i++){
+		cout<<"["<<i+1<<"]"<<": "<<"NOMBRE: "<<Productos[i].nombre<<endl;
+		cout<<"["<<i+1<<"]"<<": PRECIO: "<<Productos[i].precio<<"$"<<endl;
+		cout<<".............................................."<<endl;
+	}
+	
+	cout<<"SALIENDO AL MENU PRINCIPAL......."<<endl;
+	cout<<endl;
+}
 
 
