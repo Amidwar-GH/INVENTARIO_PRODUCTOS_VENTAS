@@ -26,6 +26,7 @@ void Eleccion(char opcion);
 void listarProductos();
 void buscarProducto();
 void actualizarProducto();
+void eliminarProducto();
 
 int main(){
 	char opcion;
@@ -63,7 +64,7 @@ void Eleccion(char opcion){
 		case 'B': listarProductos(); break;
 		case 'C': buscarProducto(); break; 
 		case 'D': actualizarProducto(); break; 
-		//case 'E': 
+		case 'E': eliminarProducto(); break; 
 		//case 'F': 
 		//case 'G': 
 		//case 'H': 
@@ -204,6 +205,45 @@ void actualizarProducto(){
 	}while(RPTA== 'S');
 	
 	cout<<"\nSaliendo al MENU principal..."<<endl;
+}
+
+void eliminarProducto(){
+	
+	char RESP;
+	
+	do{
+		cin.ignore();
+		string Eliminacion;
+		bool ELIM = false;
+		
+		
+		cout<<"------------------------------------------"<<endl; 
+		cout<<"-PROCEDIMIENTO DE ELIMINACION DE PRODUCTO-"<<endl;
+		cout<<"------------------------------------------"<<endl;
+		cout<<"Digite el nombre del producto a eliminar"<<endl;
+		getline(cin,Eliminacion);
+		
+		for(int i=0; i<ContadorDeProductos; i++){
+			if(Productos[i].nombre == Eliminacion){
+				for(int j=i; j<ContadorDeProductos-1; j++){
+					Productos[j] = Productos[j+1];
+				}
+				ContadorDeProductos -= 1;
+				cout<<"El producto fue eliminado correctamente.";
+				ELIM = true;
+				break;
+			}
+		}
+		if(!ELIM){
+			cout<<"El producto no esta registrado"<<endl;
+		}
+		cout<<"Desea eliminar otro producto? (S/N): "<<endl;
+		cin>>RESP;
+		RESP=toupper(RESP);
+		
+	}while(RESP == 'S');
+	
+	cout<<"\nRegresando al MENU principal"<<endl;
 }
 
 
