@@ -28,7 +28,7 @@ void buscarProducto();
 void actualizarProducto();
 void eliminarProducto();
 void registrarVenta();
-
+void listarVentas();
 
 int main(){
 	char opcion;
@@ -68,7 +68,7 @@ void Eleccion(char opcion){
 		case 'D': actualizarProducto(); break; 
 		case 'E': eliminarProducto(); break; 
 		case 'F': registrarVenta(); break;
-		//case 'G': 
+		case 'G': listarVentas(); break; 
 		//case 'H': 
 		case 'S': cout << "Saliendo del sistema..."; break;
 		default: cout << "Opcion invalida.\n";
@@ -293,6 +293,22 @@ void registrarVenta(){
 	}while(RESPUESTA == 'S');
 	
 	cout<<"Regresando al MENU principal..."<<endl;
+}
+
+void listarVentas(){
+	cout<<"------------------------------------"<<endl; 
+	cout<<"-PROCEDIMIENTO DE LISTADO DE VENTAS-"<<endl;
+	cout<<"------------------------------------"<<endl;
+	
+	if(ContadorDeVentas == 0){
+		cout<<"Aun no hay ventas que se hayan registrado."<<endl;
+		return;
+	}
+	
+	for(int i=0; i<ContadorDeVentas; i++){
+		cout<<"Venta numero"<<Ventas[i].codigo<<" | Producto: "<<Ventas[i].producto<<" | Cantidad: "<<Ventas[i].cantidad<<" | Total: "<<Ventas[i].Ptotal<<endl;
+		
+	}
 }
 
 
