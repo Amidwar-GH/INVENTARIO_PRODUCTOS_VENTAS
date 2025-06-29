@@ -25,6 +25,7 @@ void registrarProducto();
 void Eleccion(char opcion);
 void listarProductos();
 void buscarProducto();
+void actualizarProducto();
 
 int main(){
 	char opcion;
@@ -54,13 +55,14 @@ int main(){
 	return 0;
 }
 
+
 void Eleccion(char opcion){
 	
 	switch (opcion){
 		case 'A': registrarProducto(); break;
 		case 'B': listarProductos(); break;
 		case 'C': buscarProducto(); break; 
-		//case 'D': 
+		case 'D': actualizarProducto(); break; 
 		//case 'E': 
 		//case 'F': 
 		//case 'G': 
@@ -69,6 +71,7 @@ void Eleccion(char opcion){
 		default: cout << "Opción invalida.\n";
 	}
 }
+
 
 void registrarProducto(){
 	char RP;
@@ -102,6 +105,7 @@ void registrarProducto(){
 	cout<<"Regresando al menu principal..."<<endl;
 }
 
+
 void listarProductos(){
 	cout<<"-------------------------------------"<<endl; 
 	cout<<"-PROCEDIMIENTO DE LISTA DE PRODUCTOS-"<<endl;
@@ -119,9 +123,10 @@ void listarProductos(){
 		cout<<".............................................."<<endl;
 	}
 	
-	cout<<"SALIENDO AL MENU PRINCIPAL......."<<endl;
+	cout<<"Regresando al MENU principal..."<<endl;
 	cout<<endl;
 }
+
 
 void buscarProducto(){
 	cin.ignore();
@@ -145,9 +150,60 @@ void buscarProducto(){
 		cout<<"Producto no encontrado"<<endl;
 	}
 	cout<<endl;
-	cout<<"Regresando al meu principal...";
+	cout<<"Regresando al MENU principal...";
 	cout<<endl;
 }
 
+void actualizarProducto(){
+	char RPTA;
+	
+	if(ContadorDeProductos > 0 ){
+		cout<<"Esta es la lista de productos actuales"<<endl;
+		for(int i=0; i<ContadorDeProductos; i++){
+		cout<<"["<<i+1<<"]"<<": "<<"NOMBRE: "<<Productos[i].nombre<<endl;
+		cout<<"["<<i+1<<"]"<<": PRECIO: "<<Productos[i].precio<<"$"<<endl;
+		cout<<".............................................."<<endl;
+		}
+	}else{
+		cout<<"Aun no hay productos registrados"<<endl;
+	}
+	
+	
+	do{
+		cin.ignore();
+		string Busqueda;
+		bool encontrado = false;
+		
+		
+		cout<<"-------------------------------------------"<<endl; 
+		cout<<"-PROCEDIMIENTO DE ACTUALIZADOR DE PRODUCTO-"<<endl;
+		cout<<"-------------------------------------------"<<endl;
+		cout<<"Digite el nombre del producto que desea actualizar: ";
+		getline(cin, Busqueda);
+		
+		for(int i=0; i<ContadorDeProductos; i++){
+			if(Productos[i].nombre == Busqueda){
+				cout<<"Digite el nuevo nombre del producto:"<<endl;
+				getline(cin, Productos[i].nombre);
+				cout<<"Digite el nuevo precio del producto"<<endl;
+				cin>>Productos[i].precio;
+				cout<<"El producto"<<Productos[i].nombre<<" fue actualizado"<<endl;
+				encontrado = true;
+				break;
+			}
+		}
+		
+		if(!encontrado){
+			cout<<"El producto no fue encontrado."<<endl;
+		}
+		
+		cout<<"Desea actualizar otro producto? (S/N)"<<endl;
+		cin>>RPTA;
+		RPTA=toupper(RPTA);
+		
+	}while(RPTA== 'S');
+	
+	cout<<"\nSaliendo al MENU principal..."<<endl;
+}
 
 
