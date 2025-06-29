@@ -27,6 +27,8 @@ void listarProductos();
 void buscarProducto();
 void actualizarProducto();
 void eliminarProducto();
+void registrarVenta();
+
 
 int main(){
 	char opcion;
@@ -65,11 +67,11 @@ void Eleccion(char opcion){
 		case 'C': buscarProducto(); break; 
 		case 'D': actualizarProducto(); break; 
 		case 'E': eliminarProducto(); break; 
-		//case 'F': 
+		case 'F': registrarVenta(); break;
 		//case 'G': 
 		//case 'H': 
 		case 'S': cout << "Saliendo del sistema..."; break;
-		default: cout << "Opción invalida.\n";
+		default: cout << "Opcion invalida.\n";
 	}
 }
 
@@ -229,7 +231,7 @@ void eliminarProducto(){
 					Productos[j] = Productos[j+1];
 				}
 				ContadorDeProductos -= 1;
-				cout<<"El producto fue eliminado correctamente.";
+				cout<<"El producto fue eliminado correctamente."<<endl;
 				ELIM = true;
 				break;
 			}
@@ -244,6 +246,53 @@ void eliminarProducto(){
 	}while(RESP == 'S');
 	
 	cout<<"\nRegresando al MENU principal"<<endl;
+}
+
+void registrarVenta(){
+	char RESPUESTA;
+	do{
+		cin.ignore();
+		string NombreDelProducto;
+		int cantidad;
+		bool COINCIDENCIA = false;
+		int casillero;
+		
+		cout<<"-------------------------------------"<<endl; 
+		cout<<"-PROCEDIMIENTO DE REGISTRO DE VENTAS-"<<endl;
+		cout<<"-------------------------------------"<<endl;
+		cout<<"Digite el nombre del producto que se vendio: ";
+		getline(cin,NombreDelProducto);
+		
+		for(int i=0; i<ContadorDeProductos; i++){
+			if(NombreDelProducto == Productos[i].nombre){
+				casillero = i;
+				COINCIDENCIA = true;
+				break;
+			}
+		}
+		
+		if(!COINCIDENCIA){
+			cout<<"El producto no fue registrado"<<endl;
+		}else{
+			cout<<"Cantidad vendida: "<<endl;
+			cin >> cantidad;
+			
+			Ventas[ContadorDeVentas].codigo = ContadorDeVentas + 1;
+			Ventas[ContadorDeVentas].producto = Productos[casillero].nombre;
+			Ventas[ContadorDeVentas].cantidad = cantidad;
+			Ventas[ContadorDeVentas].Ptotal = Productos[casillero].precio*cantidad;
+			ContadorDeVentas += 1;
+			
+			cout<<"La venta fue registrada."<<endl;	
+		}
+		
+		cout<<"Desea registrar otra venta? (S/N)"<<endl;
+		cin>>RESPUESTA;
+		RESPUESTA = toupper(RESPUESTA);
+		
+	}while(RESPUESTA == 'S');
+	
+	cout<<"Regresando al MENU principal..."<<endl;
 }
 
 
