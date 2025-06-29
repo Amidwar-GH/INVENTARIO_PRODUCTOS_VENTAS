@@ -24,6 +24,7 @@ int ContadorDeVentas = 0;
 void registrarProducto();
 void Eleccion(char opcion);
 void listarProductos();
+void buscarProducto();
 
 int main(){
 	char opcion;
@@ -58,7 +59,7 @@ void Eleccion(char opcion){
 	switch (opcion){
 		case 'A': registrarProducto(); break;
 		case 'B': listarProductos(); break;
-		//case 'C': 
+		case 'C': buscarProducto(); break; 
 		//case 'D': 
 		//case 'E': 
 		//case 'F': 
@@ -121,5 +122,32 @@ void listarProductos(){
 	cout<<"SALIENDO AL MENU PRINCIPAL......."<<endl;
 	cout<<endl;
 }
+
+void buscarProducto(){
+	cin.ignore();
+	string Busqueda;
+	cout<<"--------------------------------------"<<endl; 
+	cout<<"-PROCEDIMIENTO DE BUSQUEDA DE PRODUCTO-"<<endl;
+	cout<<"--------------------------------------"<<endl;
+	cout<<"Digite el nombre del producto que desea buscar: ";
+	getline(cin,Busqueda);
+	
+	bool encontrado = false;
+	for(int i=0; i<ContadorDeProductos; i++){
+		if(Productos[i].nombre == Busqueda){
+			cout<<"EL producto fue encontrado: "<<Productos[i].nombre
+				<<"| Precio "<<Productos[i].precio<<endl;
+			encontrado = true;
+			break;
+		}		
+	}
+	if(!encontrado){
+		cout<<"Producto no encontrado"<<endl;
+	}
+	cout<<endl;
+	cout<<"Regresando al meu principal...";
+	cout<<endl;
+}
+
 
 
